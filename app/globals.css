@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
+/* Light mode colors (default) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ededed;  /* Light gray background */
+  --foreground: #0a0a0a;  /* Very dark text */
+  --link-color: #1F2937;  /* Dark gray (matches button light mode) */
+  --link-hover: #374151; /* Slightly lighter on hover */
+   --bg-image: url('https://cdn.prod.website-files.com/6645ebe9ea0696e0566142c7/66968228e57e0a034f1b7b15_Thumbnail%20(1).webp'); /* Light mode */
+}
+
+/* Dark mode colors - these activate when HTML has "dark" class */
+html.dark {
+  --background: #0a0a0a;  /* Very dark background */
+  --foreground: #ededed;  /* Light gray text */
+  --link-color: #FFFFFF;  /* White (matches button dark mode) */
+  --link-hover: #e5e7eb; /* Slightly darker on hover */
+  --bg-image: url('https://images.pexels.com/photos/813269/pexels-photo-813269.jpeg?cs=srgb&dl=pexels-minan1398-813269.jpg&fm=jpg'); /* Dark mode background */
 }
 
 @theme inline {
@@ -12,15 +25,25 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Apply the theme colors to all content (children and layout) */
+body {
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: var(--background);  /* Fallback color */
+  color: var(--foreground);       /* Changes between light/dark text colors */
+  font-family: Arial, Helvetica, sans-serif;
+  /* Smooth animation when switching from light to dark (or vice versa) */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Dynamic link styling */
+a {
+  color: var(--link-color);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
 }
